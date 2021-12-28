@@ -4,13 +4,9 @@ from django.http import HttpResponse
 
 # Create your views here.
 
-def purchase(request):
+def purchases(request):
     context = {}
-    load_template = request.path.split('/')[-1]
+    load_template = 'purchase-read-all.html'
     context['segment'] = load_template
     html_template = loader.get_template('purchase/' + load_template)
     return HttpResponse(html_template.render(context, request))
-
-    # return render(request, "purchase/purchase.html", {
-    #     "gondrong": "gondrong1"
-    # })
