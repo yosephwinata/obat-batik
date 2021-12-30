@@ -10,45 +10,15 @@
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
         <div class="d-block mb-4 mb-md-0">
             <h2 class="h4">Supplier</h2>
-            {% comment %} <p class="mb-0">Sub heading</p> {% endcomment %}
         </div>
         <div class="btn-toolbar mb-2 mb-md-0">
-            {% comment %} <a href="#" class="btn btn-sm btn-gray-800 d-inline-flex align-items-center"> {% endcomment %}
-            <!-- Button Modal -->
-            <button type="button" class="btn btn-sm btn-gray-800 d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#supplier-modal">
-                <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
-                Buat Baru
-            </button>
-            {% comment %} </a> {% endcomment %}
-            <!-- Modal Content -->
-            <div class="modal fade" id="supplier-modal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h2 class="h6 modal-title">Tambah Supplier Baru</h2>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        {% comment %} <div class="modal-body">
-                            <p>With less than a month to go before the European Union enacts new consumer privacy laws for its citizens, companies around the world are updating their terms of service agreements to comply.</p>
-                            <p>The European Union’s General Data Protection Regulation (G.D.P.R.) goes into effect on May 25 and is meant to ensure a common set of data rights in the European Union. It requires organizations to notify users as
-                                soon as possible of high-risk data breaches that could personally affect them.</p>
-                        </div> {% endcomment %}
-                        <!-- Form -->
-                        <div class="mx-4 mt-2">
-                            <div class="mb-3">
-                                <label for="supplierName">Nama*</label>
-                                <input type="text" class="form-control" id="supplierName" required>                
-                            </div>
-                        </div>
-                        <!-- End of Form -->
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary">Submit</button>
-                            <button type="button" class="btn btn-link text-gray-600 ms-auto" data-bs-dismiss="modal">Cancel</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- End of Modal Content -->
+            {% comment %} <a href="{% url "post-detail-page" post.slug %}"> {% endcomment %}
+            <a href="{% url "supplier-create-page" %}">
+                <button type="button" class="btn btn-sm btn-gray-800 d-inline-flex align-items-center" data-bs-toggle="modal" data-bs-target="#supplier-modal">
+                    <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                    Buat Baru
+                </button>
+            </a>
         </div>
     </div>
 
@@ -71,8 +41,8 @@
         <table class="table user-table table-hover align-items-center">
             <thead>
                 <tr>
-                    <th class="border-bottom">Name</th>						
-                    <th class="border-bottom">Action</th>
+                    <th class="border-bottom">Nama</th>						
+                    <th class="border-bottom">Tindakan</th>
                 </tr>
             </thead>
             <tbody>

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.template import loader
 from django.http import HttpResponse
 
@@ -12,8 +12,28 @@ def suppliers(request):
     context['segment'] = load_template
     # latest_posts = Post.objects.all().order_by("-date")[:3]
     context['suppliers'] = Supplier.objects.all()
-    print('toto', context)
     return render(request, 'supplier/' + load_template, context)
+
+def supplier_create(request):
+    context = {}
+    load_template = 'supplier-create.html'
+    context['segment'] = load_template
+    return render(request, 'supplier/' + load_template, context)
+
+def supplier_update(request, name):
+    context = {}
+    load_template = 'supplier-update.html'
+    context['supplier'] = get_object_or_404(Supplier, name=name)
+    context['segment'] = load_template
+    print('drong', context)
+    return render(request, 'supplier/' + load_template, context)
+
+
+# def post_detail(request, slug):
+#     identified_post = get_object_or_404(Post, slug=slug)
+#     return render(request, "blog/post-detail.html", {
+#         "post": identified_post
+#     })
 
 
 ##V2
