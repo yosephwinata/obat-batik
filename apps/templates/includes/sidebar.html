@@ -76,7 +76,7 @@
                 </span>
             </a>
         </li>
-        <li class="nav-item {% if 'supplier-read-all.html' in segment %} active {% endif %}">
+        <li class="nav-item {% if 'supplier-read-all.html' in segment or 'supplier-update.html' in segment or 'supplier-create.html' in segment%} active {% endif %}">
             <a href="{% url "supplier-read-all-page" %}" class="nav-link d-flex align-items-center justify-content-between">
             {% comment %} <a href="/suppliers" class="nav-link d-flex align-items-center justify-content-between"> {% endcomment %}
                 <span>
