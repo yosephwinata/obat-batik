@@ -8,5 +8,4 @@ def purchases(request):
     context = {}
     load_template = 'purchase-read-all.html'
     context['segment'] = load_template
-    html_template = loader.get_template('purchase/' + load_template)
-    return HttpResponse(html_template.render(context, request))
+    return render(request, 'purchase/' + load_template, context)
