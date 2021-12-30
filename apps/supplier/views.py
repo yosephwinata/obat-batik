@@ -12,6 +12,7 @@ def suppliers(request):
     context['segment'] = load_template
     # latest_posts = Post.objects.all().order_by("-date")[:3]
     context['suppliers'] = Supplier.objects.all()
+    context['count'] = Supplier.objects.count()
     return render(request, 'supplier/' + load_template, context)
 
 def supplier_create(request):
@@ -20,12 +21,11 @@ def supplier_create(request):
     context['segment'] = load_template
     return render(request, 'supplier/' + load_template, context)
 
-def supplier_update(request, name):
+def supplier_update(request, slug):
     context = {}
     load_template = 'supplier-update.html'
-    context['supplier'] = get_object_or_404(Supplier, name=name)
+    context['supplier'] = get_object_or_404(Supplier, slug=slug)
     context['segment'] = load_template
-    print('drong', context)
     return render(request, 'supplier/' + load_template, context)
 
 

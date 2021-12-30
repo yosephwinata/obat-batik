@@ -5,5 +5,6 @@ from .models import Supplier
 
 class SupplierAdmin(admin.ModelAdmin):
     list_display = ("name", "updated_at")
+    prepopulated_fields = {"slug": ("name",)}
 
 admin.site.register(Supplier, SupplierAdmin)
