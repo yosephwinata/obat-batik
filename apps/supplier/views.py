@@ -1,24 +1,43 @@
 from django.shortcuts import get_object_or_404, render
 from django.template import loader
 from django.http import HttpResponse
+from django.http import HttpResponseRedirect
+from django.views import View
+from django.views.generic.edit import DeleteView
 
 from .models import Supplier
+from .forms import SupplierForm
 
 # Create your views here.
 
-def suppliers(request):
+def supplier_read_all(request):
     context = {}
+    
     load_template = 'supplier-read-all.html'
     context['segment'] = load_template
-    # latest_posts = Post.objects.all().order_by("-date")[:3]
+    # latest_posts = Supplier.objects.all().order_by("-name")[:3]
     context['suppliers'] = Supplier.objects.all()
     context['count'] = Supplier.objects.count()
     return render(request, 'supplier/' + load_template, context)
 
 def supplier_create(request):
     context = {}
+
+    if request.method == 'POST':
+        form = SupplierForm(request.POST)
+
+        if form.is_valid():
+            supplier = Supplier(
+                name=form.cleaned_data['name'])
+            supplier.save()
+            return HttpResponseRedirect("/suppliers")
+
+    else:
+        form = SupplierForm()
+
     load_template = 'supplier-create.html'
     context['segment'] = load_template
+    context['form'] = form
     return render(request, 'supplier/' + load_template, context)
 
 def supplier_update(request, slug):
@@ -29,26 +48,15 @@ def supplier_update(request, slug):
     return render(request, 'supplier/' + load_template, context)
 
 
-# def post_detail(request, slug):
-#     identified_post = get_object_or_404(Post, slug=slug)
-#     return render(request, "blog/post-detail.html", {
-#         "post": identified_post
-#     })
+def supplier_delete(request, slug):
+    context ={}
 
+    obj = get_object_or_404(Supplier, slug=slug)
+    if request.method =="POST":
+        obj.delete()
+        return HttpResponseRedirect("/suppliers")
 
-##V2
-# def suppliers(request):
-#     context = {}
-#     load_template = 'supplier-read-all.html'
-#     context['segment'] = load_template
-#     html_template = loader.get_template('supplier/' + load_template)
-#     return HttpResponse(html_template.render(context, request))
-
-##V1
-# def suppliers(request):
-#     context = {}
-#     # load_template = request.path.split('/')[-1]
-#     load_template = request.path.split('/')[-1] + '.html'
-#     context['segment'] = load_template
-#     html_template = loader.get_template('supplier/' + load_template)
-#     return HttpResponse(html_template.render(context, request))
+    load_template = 'supplier-delete.html'
+    context['supplier'] = obj
+    context['segment'] = load_template
+    return render(request, 'supplier/' + load_template, context)
