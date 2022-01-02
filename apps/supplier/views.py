@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.views import View
 from django.views.generic.edit import DeleteView
+from django.db import IntegrityError
 
 from .models import Supplier
 from .forms import SupplierForm
@@ -27,10 +28,15 @@ def supplier_create(request):
         form = SupplierForm(request.POST)
 
         if form.is_valid():
-            supplier = Supplier(
-                name=form.cleaned_data['name'])
-            supplier.save()
-            return HttpResponseRedirect("/suppliers")
+            try:
+                supplier = Supplier(
+                    name=form.cleaned_data['name'])
+                supplier.save()
+                return HttpResponseRedirect("/suppliers")
+            except IntegrityError as e: 
+                print(e)
+                if 'UNIQUE constraint' in str(e):
+                    context['error_msg'] = 'Nama sudah terdaftar'
 
     else:
         form = SupplierForm()

@@ -16,7 +16,7 @@ class SupplierForm(forms.Form):
         'max_length': 'Nama terlalu panjang'
     }, widget= forms.TextInput(attrs={
         'class':'form-control',
-		'autofocus': True,
+		'autofocus': True
     }))
 
     def __init__(self, *args, **kwargs):

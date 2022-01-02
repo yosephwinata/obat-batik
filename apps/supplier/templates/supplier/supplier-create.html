@@ -18,8 +18,9 @@
         {% for field in form %}
             <div class="col-4 {% if field.errors %}errors{% endif %}">
                 {{ field.label_tag }}
-                {{ field }}
-                {{ field.errors }}
+                <div class="is-invalid">{{ field }}</div>
+                <div class="invalid-feedback">{{ field.errors }}</div>
+                <div class="invalid-feedback">{{ error_msg }}</div>
             </div>
         {% endfor %}
         <button type="submit" class="btn btn-secondary mt-4">Submit</button>
