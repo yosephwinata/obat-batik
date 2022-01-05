@@ -17,7 +17,7 @@ def supplier_read_all(request):
     load_template = 'supplier-read-all.html'
     context['segment'] = load_template
     # latest_posts = Supplier.objects.all().order_by("-name")[:3]
-    context['suppliers'] = Supplier.objects.all()
+    context['suppliers'] = Supplier.objects.all().order_by('name')
     context['count'] = Supplier.objects.count()
     return render(request, 'supplier/' + load_template, context)
 
