@@ -13,11 +13,24 @@
         </div>
     </div>
 
-    <div class="col-4">
+    <form method="POST">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="col-4 {% if field.errors %}errors{% endif %}">
+                {{ field.label_tag }}
+                <div class="is-invalid">{{ field }}</div>
+                <div class="invalid-feedback">{{ field.errors }}</div>
+                <div class="invalid-feedback">{{ error_msg }}</div>
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-secondary mt-4">Submit</button>
+    </form>
+
+    {% comment %} <div class="col-4">
         <label for="supplierName">Nama*</label>
         <input type="text" class="form-control" id="supplierName" value="{{ supplier.name }}" required>
         <button type="button" class="btn btn-secondary mt-4">Submit</button>
-    </div>
+    </div> {% endcomment %}
 
 {% endblock content %}
 

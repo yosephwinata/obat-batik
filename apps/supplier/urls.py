@@ -1,9 +1,11 @@
 from django.urls import path
+from django.contrib.auth import views as auth_views
 
 from . import views
 from apps import supplier
 
 urlpatterns = [
+    # path('log-in/', auth_views.LoginView.as_view(template_name='users/login.html'), name='log-in'),
     path("suppliers", views.supplier_read_all, name="supplier-read-all-page"),
     path("supplier/create", views.supplier_create, name="supplier-create-page"),
     path("suppliers/<slug:slug>/update", views.supplier_update, name="supplier-update-page"),

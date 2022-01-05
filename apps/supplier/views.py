@@ -5,12 +5,12 @@ from django.http import HttpResponseRedirect
 from django.views import View
 from django.views.generic.edit import DeleteView
 from django.db import IntegrityError
+from django.contrib.auth.decorators import login_required
 
 from .models import Supplier
 from .forms import SupplierForm
 
-# Create your views here.
-
+# @login_required
 def supplier_read_all(request):
     context = {}
     
@@ -21,6 +21,7 @@ def supplier_read_all(request):
     context['count'] = Supplier.objects.count()
     return render(request, 'supplier/' + load_template, context)
 
+# @login_required
 def supplier_create(request):
     context = {}
 
@@ -42,8 +43,8 @@ def supplier_create(request):
         form = SupplierForm()
 
     load_template = 'supplier-create.html'
-    context['segment'] = load_template
     context['form'] = form
+    context['segment'] = load_template
     return render(request, 'supplier/' + load_template, context)
 
 def supplier_update(request, slug):
@@ -53,7 +54,41 @@ def supplier_update(request, slug):
     context['segment'] = load_template
     return render(request, 'supplier/' + load_template, context)
 
+def supplier_update(request, slug):
+    context ={}
+ 
+    obj = get_object_or_404(Supplier, slug = slug)
+    form = SupplierForm(request.POST or None, instance = obj)
+ 
+    if form.is_valid():
+        form.save()
+        return HttpResponseRedirect("/suppliers")
+ 
+    load_template = 'supplier-update.html'
+    context["form"] = form
+    context['segment'] = load_template
+    return render(request, 'supplier/' + load_template, context)
 
+# def supplier_update(request, slug):
+#     print("REQUEST TOTO", request)
+#     if request.method == 'POST':
+#         form = SupplierForm(request.POST, instance=request.supplier)
+#         if form.is_valid():
+#             form.save()
+#             # messages.success(request, f'Your account has been updated!')
+#             return HttpResponseRedirect("/suppliers")
+#     else:
+#         form = SupplierForm(instance=request.supplier)
+
+#     load_template = 'supplier-update.html'
+#     context = {
+#         'form': form,
+#         'segment': load_template
+#     }
+
+#     return render(request, 'supplier/' + load_template, context)
+
+# @login_required
 def supplier_delete(request, slug):
     context ={}
 
