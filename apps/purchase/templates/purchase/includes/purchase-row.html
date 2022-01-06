@@ -1,0 +1,23 @@
+{% load static %}
+
+<tr>
+    <td><span class="fw-normal">{{purchase.datetime}}</span></td>
+    <td><span class="fw-normal">{{purchase.invoice_number}}</span></td>                        
+    <td><span class="fw-normal">{{purchase.supplier}}</span></td>                        
+    <td><span class="fw-normal">{{purchase.notes}}</span></td>                        
+    <td>
+        {% comment %} <a href="{% url "supplier-update-page" supplier.slug %}"> {% endcomment %}
+            <button class="btn btn-link m-0 p-0">
+                <i class="far fa-edit" title="Ubah" data-bs-toggle="tooltip"></i>
+            </button>
+        {% comment %} </a> {% endcomment %}
+        {% comment %} <a href="{% url "supplier-delete-page" supplier.slug %}"> {% endcomment %}
+            <button class="btn btn-link m-0 p-0">
+                <i class="far fa-trash-alt" title="Hapus" data-bs-toggle="tooltip"></i>
+            </button>
+        {% comment %} </a> {% endcomment %}
+    </td>
+</tr>
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

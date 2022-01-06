@@ -1,0 +1,32 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Pembelian {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+        <div class="d-block mb-4 mb-md-0">
+            <h2 class="h4">Tambah Pembelian Baru</h2>
+        </div>
+    </div>
+
+    <form action="{% url "purchase-create-page" %}" method="POST">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="col-4 {% if field.errors %}errors{% endif %}">
+                {{ field.label_tag }}
+                <div class="is-invalid">{{ field }}</div>
+                <div class="invalid-feedback">{{ field.errors }}</div>
+                <div class="invalid-feedback">{{ error_msg }}</div>
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-secondary mt-4">Submit</button>
+    </form>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

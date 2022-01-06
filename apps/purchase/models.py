@@ -5,9 +5,9 @@ from apps.supplier.models import Supplier
 # Create your models here.
 
 class Purchase(models.Model):
-    datetime = models.DateTimeField(db_index=True)
+    datetime = models.DateField(db_index=True)
     invoice_number = models.CharField(max_length=70, blank=True, db_index=True)
-    supplier = models.ForeignKey(Supplier, on_delete=models.PROTECT, null=True, db_index=True, related_name='purchases')
+    supplier = models.ForeignKey(Supplier, on_delete=models.PROTECT, null=True, blank=True, db_index=True, related_name='purchases')
     notes = models.TextField(validators=[MaxLengthValidator(255)], blank=True)
     updated_at = models.DateTimeField(auto_now=True)
 
