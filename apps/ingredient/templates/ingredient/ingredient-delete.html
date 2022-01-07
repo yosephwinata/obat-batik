@@ -1,0 +1,30 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Bahan {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+        <div class="d-block mb-4 mb-md-0">
+            <h2 class="h4">Hapus Bahan</h2>
+        </div>
+    </div>
+
+    <form method="post">
+        {% csrf_token %}
+        <h6>Apa anda yakin mau menghapus "{{ ingredient.name }}"?</h6>
+        <div class="mt-4">
+            <a href={% url "ingredient-read-all-page" %}>
+                <input type="button" value="Cancel" class="btn btn-outline-gray-800">
+            </a>
+            <input type="submit" value="Hapus" class="btn btn-danger">
+        </div>
+    </form>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

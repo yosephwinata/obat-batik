@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'apps.ingredient',
     'apps.purchase',
     'apps.supplier',
     'apps.home',  # Enable the inner home (home)
