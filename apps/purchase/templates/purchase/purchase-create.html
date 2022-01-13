@@ -16,13 +16,63 @@
     <form action="{% url "purchase-create-page" %}" method="POST">
         {% csrf_token %}
         {% for field in form %}
-            <div class="col-4 {% if field.errors %}errors{% endif %}">
+            <div class="col-4 my-2 {% if field.errors %}errors{% endif %}">
                 {{ field.label_tag }}
                 <div class="is-invalid">{{ field }}</div>
                 <div class="invalid-feedback">{{ field.errors }}</div>
                 <div class="invalid-feedback">{{ error_msg }}</div>
             </div>
         {% endfor %}
+
+        <div class="row">
+            <div class="col-4">
+                <label>Bahan</label>
+            </div>
+            <div class="col-2">
+                <label>Kuantitas</label>
+            </div>
+            <div class="col-1">
+                <label>Satuan</label>
+            </div>
+        </div>
+
+        {% for i in range %}
+            <div class="row my-1">
+                <div class="col-4">
+                    <select class="form-select" name="ingredient-{{i}}" aria-label="Pilihan bahan dasar">
+                        <option value="" selected></option>
+                        {% for ingredient in ingredients %}
+                            <option value="{{ ingredient }}">{{ ingredient }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-2 my-auto">
+                    <input type="number" class="form-control" name="quantity-{{i}}">
+                </div>
+                <div class="col-1 my-auto">
+                    <p class="my-auto">gr</p>
+                </div>
+            </div>
+        {% endfor %}
+
+        {% comment %} {% for x in range %}
+            <div class="row">
+                <div class="col-4">
+                    <select id="state" class="w-100" name="ingredient">
+                        {% for ingredient in ingredients %}
+                            <option value="{{ ingredient }}">{{ ingredient }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-2 my-auto">
+                    <input type="text" class="form-control" id="quantity" name="quantity">
+                </div>
+                <div class="col-1 my-auto">
+                    <p class="my-auto">gr</p>
+                </div>
+            </div>
+        {% endfor %} {% endcomment %}
+
         <button type="submit" class="btn btn-secondary mt-4">Submit</button>
     </form>
 

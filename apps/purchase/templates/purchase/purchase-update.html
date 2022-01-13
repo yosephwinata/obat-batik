@@ -1,0 +1,64 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Pembelian {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+        <div class="d-block mb-4 mb-md-0">
+            <h2 class="h4">Ubah Pembelian</h2>
+        </div>
+    </div>
+
+    <form method="POST">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="col-4 {% if field.errors %}errors{% endif %}">
+                {{ field.label_tag }}
+                <div class="is-invalid">{{ field }}</div>
+                <div class="invalid-feedback">{{ field.errors }}</div>
+                <div class="invalid-feedback">{{ error_msg }}</div>
+            </div>
+        {% endfor %}
+
+        <div class="row">
+            <div class="col-4">
+                <label>Bahan</label>
+            </div>
+            <div class="col-2">
+                <label>Kuantitas</label>
+            </div>
+            <div class="col-1">
+                <label>Satuan</label>
+            </div>
+        </div>
+
+        {% for obj in purchase_ingredient %}
+            <div class="row my-1">
+                <div class="col-4">
+                    <select class="form-select" name="ingredient-{{ obj.idx }}" aria-label="Pilihan bahan dasar">
+                        <option value="" selected></option>
+                        {% for ingredient in ingredients %}
+                            <option value="{{ ingredient }}" {% if ingredient == obj.ingredient %}selected{% endif %}>{{ ingredient }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-2 my-auto">
+                    <input type="number" class="form-control" name="quantity-{{ obj.idx }}" value={{ obj.quantity.normalize }}>
+                </div>
+                <div class="col-1 my-auto">
+                    <p class="my-auto">gr</p>
+                </div>
+            </div>
+        {% endfor %}
+
+        <button type="submit" class="btn btn-secondary mt-4">Submit</button>
+    </form>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
