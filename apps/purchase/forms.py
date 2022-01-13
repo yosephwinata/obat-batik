@@ -31,7 +31,8 @@ class PurchaseForm(forms.ModelForm):
                 'class':'form-control'
             }),
             'notes': forms.Textarea(attrs={
-                'class':'form-control'
+                'class':'form-control',
+                'rows': 2,
             })
         }
         error_messages = {

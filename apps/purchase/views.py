@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Purchase, PurchaseIngredient, Ingredient
 from .forms import PurchaseForm
 
-many_to_many_rows = 5
+many_to_many_rows = 15
 
 # @login_required
 def purchase_read_all(request):
