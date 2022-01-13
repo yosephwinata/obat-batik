@@ -109,6 +109,19 @@ def purchase_update(request, pk):
     context['purchase_ingredient'] = previous_many_to_many_data_list
     return render(request, 'purchase/' + load_template, context)
 
+def purchase_delete(request, pk):
+    context ={}
+
+    obj = get_object_or_404(Purchase, pk=pk)
+    if request.method =="POST":
+        obj.delete()
+        return HttpResponseRedirect("/purchases")
+
+    load_template = 'purchase-delete.html'
+    context['purchase'] = obj
+    context['segment'] = load_template
+    return render(request, 'purchase/' + load_template, context)
+
 # def purchase_update(request, pk):
 #     context = {}
  

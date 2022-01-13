@@ -17,5 +17,5 @@ class Purchase(models.Model):
 # https://docs.djangoproject.com/en/dev/topics/db/models/#extra-fields-on-many-to-many-relationships
 class PurchaseIngredient(models.Model):
     purchase = models.ForeignKey(Purchase, on_delete=models.CASCADE)
-    ingredient = models.ForeignKey(Ingredient, on_delete=models.RESTRICT)
+    ingredient = models.ForeignKey(Ingredient, on_delete=models.PROTECT)
     quantity = models.DecimalField(max_digits=20, decimal_places=3)
