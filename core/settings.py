@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'apps.ingredient',
     'apps.purchase',
     'apps.supplier',
+    'apps.recipe',
     'apps.home',  # Enable the inner home (home)
 ]
 
