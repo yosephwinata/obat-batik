@@ -104,3 +104,16 @@ def recipe_update(request, slug):
     context['range'] = range(many_to_many_rows)
     context['recipe_ingredient'] = previous_many_to_many_data_list
     return render(request, 'recipe/' + load_template, context)
+
+def recipe_delete(request, slug):
+    context ={}
+
+    obj = get_object_or_404(Recipe, slug=slug)
+    if request.method =="POST":
+        obj.delete()
+        return HttpResponseRedirect("/recipes")
+
+    load_template = 'recipe-delete.html'
+    context['recipe'] = obj
+    context['segment'] = load_template
+    return render(request, 'recipe/' + load_template, context)
