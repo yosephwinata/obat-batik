@@ -15,27 +15,26 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Recipe',
+            name='Adjustment',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(db_index=True, max_length=70, unique=True)),
+                ('datetime', models.DateField(db_index=True)),
                 ('notes', models.TextField(blank=True, validators=[django.core.validators.MaxLengthValidator(255)])),
                 ('updated_at', models.DateTimeField(auto_now=True)),
-                ('slug', models.SlugField(unique=True)),
             ],
         ),
         migrations.CreateModel(
-            name='RecipeIngredient',
+            name='AdjustmentIngredient',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('quantity', models.DecimalField(decimal_places=3, max_digits=20)),
+                ('adjustment', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='adjustment.adjustment')),
                 ('ingredient', models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='ingredient.ingredient')),
-                ('recipe', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='recipe.recipe')),
             ],
         ),
         migrations.AddField(
-            model_name='recipe',
-            name='recipe_ingredients',
-            field=models.ManyToManyField(through='recipe.RecipeIngredient', to='ingredient.Ingredient'),
+            model_name='adjustment',
+            name='adjustment_ingredients',
+            field=models.ManyToManyField(through='adjustment.AdjustmentIngredient', to='ingredient.Ingredient'),
         ),
     ]

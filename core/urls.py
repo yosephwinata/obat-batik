@@ -14,5 +14,6 @@ urlpatterns = [
     path("", include("apps.ingredient.urls")),
     path("", include("apps.recipe.urls")),
     path("", include("apps.production.urls")),
+    path("", include("apps.adjustment.urls")),
     path("", include("apps.home.urls")),             # UI Kits Html files
 ]
