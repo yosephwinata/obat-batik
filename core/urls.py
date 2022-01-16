@@ -13,6 +13,6 @@ urlpatterns = [
     path("", include("apps.supplier.urls")),
     path("", include("apps.ingredient.urls")),
     path("", include("apps.recipe.urls")),
-    # path("supplier", include("apps.supplier.urls")),
+    path("", include("apps.production.urls")),
     path("", include("apps.home.urls")),             # UI Kits Html files
 ]
