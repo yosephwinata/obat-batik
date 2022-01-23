@@ -1,0 +1,11 @@
+{% load static %}
+
+<tr>
+    <td><span class="fw-normal">{{ row.datetime }}</span></td>
+    <td><span class="fw-normal">{{ row.detail }}</span></td>
+    <td><span class="fw-normal">{{ row.inventory_changes }}</span></td>
+    <td><span class="fw-normal">{{ row.current_inventory }}</span></td>
+</tr>
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}

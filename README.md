@@ -263,3 +263,7 @@ Visit `http://localhost:8001` in your browser. The app should be up & running.
 
 ---
 [Django Dashboard Volt PRO](https://appseed.us/admin-dashboards/django-dashboard-volt-pro) - Provided by **AppSeed** [App Generator](https://appseed.us/app-generator).
+
+
+Icons:
+https://fontawesome.com/

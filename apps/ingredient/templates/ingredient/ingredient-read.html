@@ -1,0 +1,37 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Bahan{% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+        <div class="d-block mb-4 mb-md-0">
+            <h2 class="h4">Histori Bahan: {{ ingredient.name }}</h2>
+        </div>
+    </div>
+
+    <div class="card card-body shadow border-0 table-wrapper table-responsive">
+        <table class="table user-table table-hover align-items-center">
+            <thead>
+                <tr>
+                    <th class="border-bottom">Tanggal</th>		
+                    <th class="border-bottom">Pembelian/Produksi</th>
+                    <th class="border-bottom">Perubahan Stok</th>
+                    <th class="border-bottom">Stok</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in history %}
+                    {% include "ingredient/includes/ingredient-history-row.html" %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}{% endblock javascripts %}
