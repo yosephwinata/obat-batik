@@ -7,7 +7,7 @@ Copyright (c) 2019 - present AppSeed.us
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from .forms import LoginForm, SignUpForm
-
+from django.urls import reverse
 
 def login_view(request):
     form = LoginForm(request.POST or None)
@@ -22,7 +22,7 @@ def login_view(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect("/")
+                return redirect(reverse('production-read-all-page'))
             else:
                 msg = 'Invalid credentials'
         else:

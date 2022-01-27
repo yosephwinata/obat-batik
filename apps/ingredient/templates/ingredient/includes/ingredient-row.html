@@ -1,7 +1,8 @@
 {% load static %}
 
 <tr>
-    <td><span class="fw-normal">{{ingredient.name}}</span></td>                        
+    <td><span class="fw-normal">{{ingredient.name}}</span></td>
+    <td><span class="fw-normal">{{ingredient.current_inventory}}</span></td>      
     <td>
         <a href="{% url "ingredient-read-page" ingredient.slug %}">
             <button class="btn btn-link m-0 p-0">

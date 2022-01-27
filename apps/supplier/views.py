@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Supplier
 from .forms import SupplierForm
 
-# @login_required
+@login_required(login_url="/login/")
 def supplier_read_all(request):
     context = {}
     
@@ -17,7 +17,7 @@ def supplier_read_all(request):
     context['count'] = Supplier.objects.count()
     return render(request, 'supplier/' + load_template, context)
 
-# @login_required
+@login_required(login_url="/login/")
 def supplier_create(request):
     context = {}
 
@@ -38,6 +38,7 @@ def supplier_create(request):
     context['segment'] = load_template
     return render(request, 'supplier/' + load_template, context)
 
+@login_required(login_url="/login/")
 def supplier_update(request, slug):
     context = {}
     load_template = 'supplier-update.html'
@@ -45,6 +46,7 @@ def supplier_update(request, slug):
     context['segment'] = load_template
     return render(request, 'supplier/' + load_template, context)
 
+@login_required(login_url="/login/")
 def supplier_update(request, slug):
     context ={}
  
@@ -79,7 +81,7 @@ def supplier_update(request, slug):
 
 #     return render(request, 'supplier/' + load_template, context)
 
-# @login_required
+@login_required(login_url="/login/")
 def supplier_delete(request, slug):
     context ={}
 

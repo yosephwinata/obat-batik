@@ -9,7 +9,7 @@ from .forms import AdjustmentForm
 
 many_to_many_rows = 15
 
-# @login_required
+@login_required(login_url="/login/")
 def adjustment_read_all(request):
     context = {}
     
@@ -19,7 +19,7 @@ def adjustment_read_all(request):
     context['count'] = Adjustment.objects.count()
     return render(request, 'adjustment/' + load_template, context)
 
-# @login_required
+@login_required(login_url="/login/")
 def adjustment_create(request):
     context = {}
     ingredients = list(Ingredient.objects.all().values_list('name', flat=True))
@@ -57,6 +57,7 @@ def adjustment_create(request):
     context['range'] = range(many_to_many_rows)
     return render(request, 'adjustment/' + load_template, context)
 
+@login_required(login_url="/login/")
 def adjustment_update(request, pk):
     context = {}
     ingredients = list(Ingredient.objects.all().values_list('name', flat=True))
@@ -106,6 +107,7 @@ def adjustment_update(request, pk):
     context['adjustment_ingredient'] = previous_many_to_many_data_list
     return render(request, 'adjustment/' + load_template, context)
 
+@login_required(login_url="/login/")
 def adjustment_delete(request, pk):
     context ={}
 

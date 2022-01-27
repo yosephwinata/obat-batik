@@ -16,18 +16,17 @@ TYPE_PURCHASE = 'PURCHASE'
 TYPE_PRODUCTION = 'PRODUCTION'
 TYPE_ADJUSTMENT = 'ADJUSTMENT'
 
-# @login_required
+@login_required(login_url="/login/")
 def ingredient_read_all(request):
     context = {}
     
     load_template = 'ingredient-read-all.html'
     context['segment'] = load_template
-    # latest_posts = Ingredient.objects.all().order_by("-name")[:3]
     context['ingredients'] = Ingredient.objects.all().order_by('name')
     context['count'] = Ingredient.objects.count()
     return render(request, 'ingredient/' + load_template, context)
 
-# @login_required
+@login_required(login_url="/login/")
 def ingredient_create(request):
     context = {}
 
@@ -48,6 +47,7 @@ def ingredient_create(request):
     context['segment'] = load_template
     return render(request, 'ingredient/' + load_template, context)
 
+@login_required(login_url="/login/")
 def ingredient_read(request, slug):
     context = {}
     history = []
@@ -117,6 +117,7 @@ def ingredient_read(request, slug):
     context['segment'] = load_template
     return render(request, 'ingredient/' + load_template, context)
 
+@login_required(login_url="/login/")
 def ingredient_update(request, slug):
     context ={}
  
@@ -132,7 +133,7 @@ def ingredient_update(request, slug):
     context['segment'] = load_template
     return render(request, 'ingredient/' + load_template, context)
 
-# @login_required
+@login_required(login_url="/login/")
 def ingredient_delete(request, slug):
     context ={}
 
