@@ -12,7 +12,7 @@ many_to_many_rows = 15
 @login_required(login_url="/login/")
 def purchase_read_all(request):
     context = {}
-    
+
     load_template = 'purchase-read-all.html'
     context['segment'] = load_template
     context['purchases'] = Purchase.objects.all().order_by('-datetime')
@@ -22,7 +22,7 @@ def purchase_read_all(request):
 @login_required(login_url="/login/")
 def purchase_create(request):
     context = {}
-    ingredients = list(Ingredient.objects.all().values_list('name', flat=True))
+    ingredients = list(Ingredient.objects.all().values_list('name', flat=True).order_by('name'))
     many_to_many_data_list = []
 
     if request.method == 'POST':
@@ -63,11 +63,11 @@ def purchase_create(request):
 @login_required(login_url="/login/")
 def purchase_update(request, pk):
     context = {}
-    ingredients = list(Ingredient.objects.all().values_list('name', flat=True))
+    ingredients = list(Ingredient.objects.all().values_list('name', flat=True).order_by('name'))
     previous_many_to_many_data_list = []
     many_to_many_data_list = []
     counter = 0
- 
+
     obj = get_object_or_404(Purchase, pk = pk)
     form = PurchaseForm(request.POST or None, instance = obj)
 
@@ -101,7 +101,7 @@ def purchase_update(request, pk):
             for i in many_to_many_data_list:
                 i.save()
         return HttpResponseRedirect("/purchases")
- 
+
     load_template = 'purchase-update.html'
     context['form'] = form
     context['segment'] = load_template
@@ -126,14 +126,14 @@ def purchase_delete(request, pk):
 
 # def purchase_update(request, pk):
 #     context = {}
- 
+
 #     obj = get_object_or_404(Purchase, pk = pk)
 #     form = PurchaseForm(request.POST or None, instance = obj)
- 
+
 #     if form.is_valid():
 #         form.save()
 #         return HttpResponseRedirect("/purchases")
- 
+
 #     load_template = 'purchase-update.html'
 #     context["form"] = form
 #     context['segment'] = load_template

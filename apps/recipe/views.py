@@ -12,7 +12,7 @@ many_to_many_rows = 15
 @login_required(login_url="/login/")
 def recipe_read_all(request):
     context = {}
-    
+
     load_template = 'recipe-read-all.html'
     context['segment'] = load_template
     context['recipes'] = Recipe.objects.all().order_by('name')
@@ -22,7 +22,7 @@ def recipe_read_all(request):
 @login_required(login_url="/login/")
 def recipe_create(request):
     context = {}
-    ingredients = list(Ingredient.objects.all().values_list('name', flat=True))
+    ingredients = list(Ingredient.objects.all().values_list('name', flat=True).order_by('name'))
     many_to_many_data_list = []
 
     if request.method == 'POST':
@@ -60,11 +60,11 @@ def recipe_create(request):
 @login_required(login_url="/login/")
 def recipe_update(request, slug):
     context = {}
-    ingredients = list(Ingredient.objects.all().values_list('name', flat=True))
+    ingredients = list(Ingredient.objects.all().values_list('name', flat=True).order_by('name'))
     previous_many_to_many_data_list = []
     many_to_many_data_list = []
     counter = 0
- 
+
     obj = get_object_or_404(Recipe, slug = slug)
     form = RecipeForm(request.POST or None, instance = obj)
 
@@ -98,7 +98,7 @@ def recipe_update(request, slug):
             for i in many_to_many_data_list:
                 i.save()
         return HttpResponseRedirect("/recipes")
- 
+
     load_template = 'recipe-update.html'
     context['form'] = form
     context['segment'] = load_template

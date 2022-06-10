@@ -12,7 +12,7 @@ many_to_many_rows = 15
 @login_required(login_url="/login/")
 def production_read_all(request):
     context = {}
-    
+
     load_template = 'production-read-all.html'
     context['segment'] = load_template
     context['productions'] = Production.objects.all().order_by('-datetime')
@@ -22,7 +22,7 @@ def production_read_all(request):
 @login_required(login_url="/login/")
 def production_create(request):
     context = {}
-    recipes = list(Recipe.objects.all().values_list('name', flat=True))
+    recipes = list(Recipe.objects.all().values_list('name', flat=True).order_by('name'))
     many_to_many_data_list = []
 
     if request.method == 'POST':
@@ -60,11 +60,11 @@ def production_create(request):
 @login_required(login_url="/login/")
 def production_update(request, pk):
     context = {}
-    recipes = list(Recipe.objects.all().values_list('name', flat=True))
+    recipes = list(Recipe.objects.all().values_list('name', flat=True).order_by('name'))
     previous_many_to_many_data_list = []
     many_to_many_data_list = []
     counter = 0
- 
+
     obj = get_object_or_404(Production, pk = pk)
     form = ProductionForm(request.POST or None, instance = obj)
 
@@ -98,7 +98,7 @@ def production_update(request, pk):
             for i in many_to_many_data_list:
                 i.save()
         return HttpResponseRedirect("/productions")
- 
+
     load_template = 'production-update.html'
     context['form'] = form
     context['segment'] = load_template
